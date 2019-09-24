@@ -1,0 +1,351 @@
+Analysis of the data of lateral flow assay
+--------------------------------------------------------------
+
+Date: `r Sys.time()`
+-----------------------------------------
+
+Initial Data of first file:
+-----------------------------------------
+````{r, echo=FALSE}
+x <- file1()
+knitr::kable(x, format = "markdown")
+
+````
+
+Initial Data of second file:
+-----------------------------------------
+````{r, echo=FALSE}
+x <- file2()
+knitr::kable(x, format = "markdown")
+
+````
+
+Combined replicates:
+-----------------------------------------
+````{r, echo=FALSE}
+x <- crep()
+knitr::kable(x, format = "markdown")
+
+````
+
+Normalized Intensity Plot of Green QD (Normalized Intensity vs Concentration):
+----------------------------------------------------------------
+````{r, echo=FALSE}
+x.crep <- crep()
+      ni.g <- x.crep[,"Green_NI"]
+      sd.g <- x.crep[,"NI.sd.green"]
+      conc <- x.crep[,"Conc_CRP_Green"]
+      ni.new <- as.data.frame(cbind(conc,ni.g,sd.g))
+      names(ni.new) <- c("x","y","sd")
+      plot1 <- ggplot(data =ni.new, aes(x,y))+ ggtitle("Intensity vs Concentration")+
+
+        geom_point(colour = "black", na.rm = TRUE)+
+
+        geom_smooth(method = "lm", formula = y~x, se = FALSE, colour = "black")+
+
+        geom_errorbar(aes(ymin= y-sd, ymax=y+sd), width=.2,
+
+                      position=position_dodge(0.05))+
+
+        xlab("Concentration (nM)") +
+
+        ylab("Normalized Intensity (tl/cl) [arbitrary unit]")+
+
+        stat_poly_eq(formula = y~x, aes(label = paste(..eq.label.., ..rr.label..,
+
+                                                      sep = "~~~")),
+
+                     parse = TRUE)
+
+
+      plot1
+      
+````
+
+Normalized Intensity Plot of Green QD (0 - 15 nM) (Normalized Intensity vs Concentration):
+----------------------------------------------------------------
+````{r, echo=FALSE}
+x.crep <- crep()
+      ni.g1 <- as.data.frame(x.crep[,"Green_NI"])
+      ni.g <- ni.g1[1:(nrow(ni.g1)-1),]
+      sd.g1 <- as.data.frame(x.crep[,"NI.sd.green"])
+      sd.g <- sd.g1[1:(nrow(sd.g1)-1),]
+      conc1 <- as.data.frame(x.crep[,"Conc_CRP_Green"])
+      conc <- conc1[1:(nrow(ni.g1)-1),]
+      ni.new <- as.data.frame(cbind(conc,ni.g,sd.g))
+      names(ni.new) <- c("x","y","sd")
+      plot1 <- ggplot(data =ni.new, aes(x,y))+ ggtitle("Intensity vs Concentration")+
+
+        geom_point(colour = "black", na.rm = TRUE)+
+
+        geom_smooth(method = "lm", formula = y~x, se = FALSE, colour = "black")+
+
+        geom_errorbar(aes(ymin= y-sd, ymax=y+sd), width=.2,
+
+                      position=position_dodge(0.05))+
+
+        xlab("Concentration (nM)") +
+
+        ylab("Normalized Intensity (tl/cl) [arbitrary unit]")+
+
+        stat_poly_eq(formula = y~x, aes(label = paste(..eq.label.., ..rr.label..,
+
+                                                      sep = "~~~")),
+
+                     parse = TRUE)
+
+
+      plot1
+      
+````
+
+Normalized Intensity Plot of Green QD (0 - 10 nM) (Normalized Intensity vs Concentration):
+----------------------------------------------------------------
+````{r, echo=FALSE}
+x.crep <- crep()
+      ni.g1 <- as.data.frame(x.crep[,"Green_NI"])
+      ni.g <- ni.g1[1:(nrow(ni.g1)-2),]
+      sd.g1 <- as.data.frame(x.crep[,"NI.sd.green"])
+      sd.g <- sd.g1[1:(nrow(sd.g1)-2),]
+      conc1 <- as.data.frame(x.crep[,"Conc_CRP_Green"])
+      conc <- conc1[1:(nrow(ni.g1)-2),]
+      ni.new <- as.data.frame(cbind(conc,ni.g,sd.g))
+      names(ni.new) <- c("x","y","sd")
+      plot1 <- ggplot(data =ni.new, aes(x,y))+ ggtitle("Intensity vs Concentration")+
+
+        geom_point(colour = "black", na.rm = TRUE)+
+
+        geom_smooth(method = "lm", formula = y~x, se = FALSE, colour = "black")+
+
+        geom_errorbar(aes(ymin= y-sd, ymax=y+sd), width=.2,
+
+                      position=position_dodge(0.05))+
+
+        xlab("Concentration (nM)") +
+
+        ylab("Normalized Intensity (tl/cl) [arbitrary unit]")+
+
+        stat_poly_eq(formula = y~x, aes(label = paste(..eq.label.., ..rr.label..,
+
+                                                      sep = "~~~")),
+
+                     parse = TRUE)
+
+
+      plot1
+      
+````
+
+Normalized Intensity Plot of Red QD (Normalized Intensity vs Concentration):
+----------------------------------------------------------------
+
+````{r, echo=FALSE}
+
+x.crep <- crep()
+      ni.r <- x.crep[,"Red_NI"]
+      sd.r <- x.crep[,"NI.sd.red"]
+      conc <- x.crep[,"Conc2_IL6_Red"]
+      ni.new <- as.data.frame(cbind(conc,ni.r,sd.r))
+      names(ni.new) <- c("x","y","sd")
+      plot1 <- ggplot(data =ni.new, aes(x,y))+ ggtitle("Intensity vs Concentration")+
+
+        geom_point(colour = "black", na.rm = TRUE)+
+
+        geom_smooth(method = "lm", formula = y~x, se = FALSE, colour = "black")+
+
+        geom_errorbar(aes(ymin= y-sd, ymax=y+sd), width=.2,
+
+                      position=position_dodge(0.05))+
+
+        xlab("Concentration (nM)") +
+
+        ylab("Normalized Intensity (tl/cl) [arbitrary unit]")+
+
+        stat_poly_eq(formula = y~x, aes(label = paste(..eq.label.., ..rr.label..,
+
+                                                      sep = "~~~")),
+
+                     parse = TRUE)
+
+
+      plot1
+
+````
+
+Normalized Intensity Plot of Red QD (0 - 15 nM) (Normalized Intensity vs Concentration):
+----------------------------------------------------------------
+````{r, echo=FALSE}
+
+x.crep <- crep()
+      ni.r1 <- as.data.frame(x.crep[,"Red_NI"])
+      ni.r <- ni.r1[2:nrow(ni.r1),]
+      sd.r1 <- as.data.frame(x.crep[,"NI.sd.red"])
+      sd.r <- sd.r1[2:nrow(sd.r1),]
+      conc1 <- as.data.frame(x.crep[,"Conc2_IL6_Red"])
+      conc <- conc1[2:nrow(conc1),]
+      ni.new <- as.data.frame(cbind(conc,ni.r,sd.r))
+      names(ni.new) <- c("x","y","sd")
+      plot1 <- ggplot(data =ni.new, aes(x,y))+ ggtitle("Intensity vs Concentration")+
+
+        geom_point(colour = "black", na.rm = TRUE)+
+
+        geom_smooth(method = "lm", formula = y~x, se = FALSE, colour = "black")+
+
+        geom_errorbar(aes(ymin= y-sd, ymax=y+sd), width=.2,
+
+                      position=position_dodge(0.05))+
+
+        xlab("Concentration (nM)") +
+
+        ylab("Normalized Intensity (tl/cl) [arbitrary unit]")+
+
+        stat_poly_eq(formula = y~x, aes(label = paste(..eq.label.., ..rr.label..,
+
+                                                      sep = "~~~")),
+
+                     parse = TRUE)
+
+
+      plot1
+
+````
+
+Normalized Intensity Plot of Red QD (0 - 10 nM) (Normalized Intensity vs Concentration):
+----------------------------------------------------------------
+````{r, echo=FALSE}
+
+x.crep <- crep()
+      ni.r1 <- as.data.frame(x.crep[,"Red_NI"])
+      ni.r <- ni.r1[3:nrow(ni.r1),]
+      sd.r1 <- as.data.frame(x.crep[,"NI.sd.red"])
+      sd.r <- sd.r1[3:nrow(sd.r1),]
+      conc1 <- as.data.frame(x.crep[,"Conc2_IL6_Red"])
+      conc <- conc1[3:nrow(conc1),]
+      ni.new <- as.data.frame(cbind(conc,ni.r,sd.r))
+      names(ni.new) <- c("x","y","sd")
+      plot1 <- ggplot(data =ni.new, aes(x,y))+ ggtitle("Intensity vs Concentration")+
+
+        geom_point(colour = "black", na.rm = TRUE)+
+
+        geom_smooth(method = "lm", formula = y~x, se = FALSE, colour = "black")+
+
+        geom_errorbar(aes(ymin= y-sd, ymax=y+sd), width=.2,
+
+                      position=position_dodge(0.05))+
+
+        xlab("Concentration (nM)") +
+
+        ylab("Normalized Intensity (tl/cl) [arbitrary unit]")+
+
+        stat_poly_eq(formula = y~x, aes(label = paste(..eq.label.., ..rr.label..,
+
+                                                      sep = "~~~")),
+
+                     parse = TRUE)
+
+
+      plot1
+
+````
+
+95% Confidence Interval:
+-------------------------------------------------------------
+````{r, echo=FALSE, results='asis'}
+x <- conf_new()
+knitr::kable(x, format = "markdown")
+
+````
+
+95% Confidence Interval (0 - 15 nM):
+-------------------------------------------------------------
+````{r, echo=FALSE, results='asis'}
+x <- conf_new_15()
+knitr::kable(x, format = "markdown")
+
+````
+
+95% Confidence Interval (0 - 10 nM):
+-------------------------------------------------------------
+````{r, echo=FALSE, results='asis'}
+x <- conf_new_10()
+knitr::kable(x, format = "markdown")
+
+````
+
+Correlation:
+--------------------------------------------------------------
+````{r, echo=FALSE, results='asis'}
+x <- cor_new()
+knitr::kable(x, format = "markdown")
+
+````
+
+Correlation (0 - 15 nM):
+--------------------------------------------------------------
+````{r, echo=FALSE, results='asis'}
+x <- cor_new_15()
+knitr::kable(x, format = "markdown")
+
+````
+
+Correlation (0 - 10 nM):
+--------------------------------------------------------------
+````{r, echo=FALSE, results='asis'}
+x <- cor_new_10()
+knitr::kable(x, format = "markdown")
+
+````
+
+LOD_First Method:
+-----------------------------------------------------------------
+````{r, echo=FALSE, results='asis'}
+
+x <- lod_new()
+knitr::kable(x, format = "markdown")
+
+````
+
+LOD_Second Method:
+-----------------------------------------------------------------
+````{r, echo=FALSE, results='asis'}
+
+x <- lod_new2()
+knitr::kable(x, format = "markdown")
+
+````
+
+Calculated Concentration:
+-----------------------------------------------------------------
+````{r, echo=FALSE, results='asis'}
+
+x <- concentration()
+
+knitr::kable(x, format = "markdown")
+
+````
+
+Settings used during implementation:
+--------------------------------------------
+````{r, echo=FALSE, results='asis'}
+
+cat("Select the type of file: ", input$filetype, "\n\n")
+
+cat("Select the type of separation for file1: ", input$decp1, "\n\n")
+
+cat("Select the type of separation for file2: ", input$decp2, "\n\n")
+
+cat("Intensity value: ", input$yin, "\n\n")
+
+cat("Slope value: ", input$mslp, "\n\n")
+
+cat("Intercept value: ", input$cint, "\n\n")
+
+````
+
+Session Information:
+--------------------------------------------
+````{r, echo=FALSE, results='asis'}
+
+sessionInfo("Qplex")
+
+````

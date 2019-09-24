@@ -1,0 +1,6 @@
+import(Biobase, methods, ggplot2, stats, RColorBrewer, graphics, ggpmisc, EBImage)
+importFrom(shiny, runApp)
+exportClasses(Qdata)
+export(readIQplexplot, readIQcutprocess, readQD, ReadQD_combine, Qmodel, Qmodel_exp,
+       QDLOD_calib, QDLOD_exp, QDCor_Cal, QDCor_exp, QDConf, QplexConc, QplexIntensity, Repsd,
+       Qmodel_exp_15, Qmodel_exp_10, readQplexImage, calib.gui, exp.gui)

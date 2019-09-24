@@ -1,0 +1,159 @@
+Analysis of the data of lateral flow assay
+--------------------------------------------------------------
+
+Date: `r Sys.time()`
+-----------------------------------------
+
+Initial Data:
+-----------------------------------------
+````{r, echo=FALSE}
+x <- file()
+knitr::kable(x, format = "markdown")
+
+````
+
+Combined replicates:
+-----------------------------------------
+````{r, echo=FALSE}
+x <- crep()
+knitr::kable(x, format = "markdown")
+
+````
+
+Normalized Intensity Plot of Green QD (Normalized Intensity vs Concentration):
+----------------------------------------------------------------
+
+````{r, echo=FALSE}
+x.crep <- crep()
+      ni.g <- x.crep[,"Green_NI"]
+      sd.g <- x.crep[,"NI.sd.green"]
+      conc <- x.crep[,"Concn"]
+      ni.new <- as.data.frame(cbind(conc,ni.g,sd.g))
+      names(ni.new) <- c("x","y","sd")
+      plot1 <- ggplot(data =ni.new, aes(x,y))+ ggtitle("Intensity vs Concentration")+
+
+        geom_point(colour = "black", na.rm = TRUE)+
+
+        geom_smooth(method = "lm", formula = y~x, se = FALSE, colour = "black")+
+
+        geom_errorbar(aes(ymin= y-sd, ymax=y+sd), width=.2,
+
+                      position=position_dodge(0.05))+
+
+        xlab("Concentration (nM)") +
+
+        ylab("Normalized Intensity (tl/cl) [arbitrary unit]")+
+
+        stat_poly_eq(formula = y~x, aes(label = paste(..eq.label.., ..rr.label..,
+
+                                                      sep = "~~~")),
+
+                     parse = TRUE)
+
+plot1
+      
+````
+
+Normalized Intensity Plot of Red QD (Normalized Intensity vs Concentration):
+----------------------------------------------------------------
+
+````{r, echo=FALSE}
+
+x.crep <- crep()
+        ni.r <- x.crep[,"Red_NI"]
+        sd.r <- x.crep[,"NI.sd.red"]
+        conc <- x.crep[,"Concn"]
+        ni.new <- as.data.frame(cbind(conc,ni.r,sd.r))
+        names(ni.new) <- c("x","y","sd")
+        plot1 <- ggplot(data =ni.new, aes(x,y))+ ggtitle("Intensity vs Concentration")+
+
+          geom_point(colour = "black", na.rm = TRUE)+
+
+          geom_smooth(method = "lm", formula = y~x, se = FALSE, colour = "black")+
+
+          geom_errorbar(aes(ymin= y-sd, ymax=y+sd), width=.2,
+
+                        position=position_dodge(0.05))+
+
+          xlab("Concentration (nM)") +
+
+          ylab("Normalized Intensity (tl/cl) [arbitrary unit]")+
+
+          stat_poly_eq(formula = y~x, aes(label = paste(..eq.label.., ..rr.label..,
+
+                                                        sep = "~~~")),
+
+                       parse = TRUE)
+plot1
+
+````
+
+
+95% Confidence Interval:
+-------------------------------------------------------------
+````{r, echo=FALSE, results='asis'}
+x <- conf_new()
+knitr::kable(x, format = "markdown")
+
+````
+
+Correlation:
+--------------------------------------------------------------
+````{r, echo=FALSE, results='asis'}
+x <- cor_new()
+knitr::kable(x, format = "markdown")
+
+````
+
+LOD_First Method:
+-----------------------------------------------------------------
+
+````{r, echo=FALSE, results='asis'}
+
+x <- lod_new()
+knitr::kable(x, format = "markdown")
+
+````
+
+LOD_Second Method:
+-----------------------------------------------------------------
+````{r, echo=FALSE, results='asis'}
+
+x <- lod_new2()
+knitr::kable(x, format = "markdown")
+
+````
+
+Calculated Concentration:
+-----------------------------------------------------------------
+````{r, echo=FALSE, results='asis'}
+
+x <- concentration()
+
+knitr::kable(x, format = "markdown")
+
+````
+
+Settings used during implementation:
+--------------------------------------------
+````{r, echo=FALSE, results='asis'}
+
+cat("Select the type of file: ", input$filetype, "\n\n")
+
+cat("Select the type of separation: ", input$decp, "\n\n")
+
+cat("Intensity value: ", input$yin, "\n\n")
+
+cat("Slope value: ", input$mslp, "\n\n")
+
+cat("Intercept value: ", input$cint, "\n\n")
+
+````
+
+Session Information:
+--------------------------------------------
+````{r, echo=FALSE, results='asis'}
+
+sessionInfo("Qplex")
+
+````
