@@ -213,7 +213,7 @@ setMethod("Repsd", signature = "Qdata", definition =
 
               {
 
-                rres.col <- (ns_g1[,i])
+                rres.col <- (ns_r1[,i])
 
                 rres.col.split <- lapply(split(rres.col,rrep.fac), sd, na.rm = TRUE)
 
