@@ -2,8 +2,8 @@ Package: Qplex
 Type: Package
 Title: An R package for analysis of the data of quantum dots duplex bioassay  
 Version: 0.1.0
-Author: Navneet Phogat, Matthias Kohl
-Maintainer: Matthias Kohl <Matthias.Kohl@stamats.de>
+Author: Navneet Phogat
+Maintainer: Navneet Phogat <navneet84@rocketmail.com>
 Description: Functions and Graphical User Interface for analysing the data
 Depends: R (>= 3.5.0), Biobase, methods, ggplot2, stats, RColorBrewer, graphics, ggpmisc, EBImage, roxygen2
 License: LGPL-3
